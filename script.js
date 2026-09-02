@@ -639,3 +639,57 @@ document
 
 
 renderSchedule();
+
+// THEME TOGGLE
+const themeToggle =
+    document.getElementById("themeToggle");
+
+const themeIcon =
+    themeToggle.querySelector("i");
+
+
+function updateThemeIcon() {
+    if (document.body.classList.contains("light")) {
+        themeIcon.classList.remove("fa-moon");
+        themeIcon.classList.add("fa-sun");
+    } else {
+        themeIcon.classList.remove("fa-sun");
+        themeIcon.classList.add("fa-moon");
+    }
+}
+
+
+function toggleTheme() {
+    document.body.classList.toggle("light");
+
+    const isLightMode =
+        document.body.classList.contains("light");
+
+    localStorage.setItem(
+        "dashboardTheme",
+        isLightMode ? "light" : "dark"
+    );
+
+    updateThemeIcon();
+}
+
+
+function loadTheme() {
+    const savedTheme =
+        localStorage.getItem("dashboardTheme");
+
+    if (savedTheme === "light") {
+        document.body.classList.add("light");
+    }
+
+    updateThemeIcon();
+}
+
+
+themeToggle.addEventListener(
+    "click",
+    toggleTheme
+);
+
+
+loadTheme();

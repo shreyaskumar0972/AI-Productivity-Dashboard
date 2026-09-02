@@ -169,3 +169,111 @@ blockquote{color:#cbd5e1;font-style:italic;line-height:1.6}
     text-align: center;
     padding: 15px 0;
 }
+
+/* Theme Toggle */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    background: #1e293b;
+}
+
+/* Light mode */
+body.light {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+body.light .sidebar {
+    background: #ffffff;
+}
+
+body.light .sidebar li {
+    color: #475569;
+}
+
+body.light .sidebar .active,
+body.light .sidebar li:hover {
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+body.light .topbar {
+    background: #ffffff;
+}
+
+body.light .search {
+    background: #e2e8f0;
+}
+
+body.light .search input {
+    color: #0f172a;
+}
+
+body.light .search input::placeholder {
+    color: #64748b;
+}
+
+body.light .panel {
+    background: #ffffff;
+}
+
+body.light .row {
+    border-bottom-color: #e2e8f0;
+}
+
+body.light .days {
+    color: #64748b;
+}
+
+body.light blockquote {
+    color: #475569;
+}
+
+body.light .theme-toggle {
+    color: #0f172a;
+}
+
+body.light .theme-toggle:hover {
+    background: #e2e8f0;
+}
+
+body.light .todo-input input,
+body.light .schedule-input input {
+    background: #f8fafc;
+    color: #0f172a;
+    border-color: #cbd5e1;
+}
+
+body.light .todo-input input::placeholder,
+body.light .schedule-input input::placeholder {
+    color: #64748b;
+}
+
+body.light .timer-mode,
+body.light .session-count {
+    color: #64748b;
+}
+
+body.light .session-count strong {
+    color: #0f172a;
+}
+
+body.light .empty-schedule {
+    color: #64748b;
+}
