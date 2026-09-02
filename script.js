@@ -187,8 +187,8 @@ function updateStatistics() {
 updateStatistics();
 
 //POMODORO TIMER
-const WORK_TIME = 25 * 60;
-const BREAK_TIME = 5 * 60;
+const WORK_TIME = 25*60;
+const BREAK_TIME = 5*60;
 
 let timeRemaining = WORK_TIME;
 let timerInterval = null;
@@ -296,6 +296,8 @@ function completeTimer() {
 
         updateSessionCount();
 
+        addStudyTime(25);
+
         alert("Work session complete! Time for a break.");
 
         isWorkSession = false;
@@ -334,3 +336,118 @@ resetTimerButton.addEventListener(
 
 updateClockDisplay();
 updateSessionCount();
+
+// STUDY PROGRESS
+const DAILY_STUDY_GOAL = 4 * 60;
+
+let studyData = JSON.parse(
+    localStorage.getItem("studyData")
+) || {
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0
+};
+
+function saveStudyData() {
+    localStorage.setItem(
+        "studyData",
+        JSON.stringify(studyData)
+    );
+}
+function formatStudyTime(minutes) {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    if (hours === 0) {
+        return `${remainingMinutes}m`;
+    }
+
+    if (remainingMinutes === 0) {
+        return `${hours}h`;
+    }
+
+    return `${hours}h ${remainingMinutes}m`;
+}
+function updateStudyStatistic() {
+    const studyTimeElement =
+        document.getElementById("studyTime");
+
+    const today = new Date().getDay();
+
+    const todayMinutes = studyData[today] || 0;
+
+    studyTimeElement.textContent =
+        formatStudyTime(todayMinutes);
+}
+function renderStudyChart() {
+    const studyBars =
+        document.getElementById("studyBars");
+
+    studyBars.innerHTML = "";
+
+    const today = new Date().getDay();
+
+    const mondayBasedData = [];
+
+    for (let i = 1; i <= 7; i++) {
+        const dayIndex = i === 7 ? 0 : i;
+
+        mondayBasedData.push({
+            dayIndex: dayIndex,
+            minutes: studyData[dayIndex] || 0
+        });
+    }
+
+    mondayBasedData.forEach(day => {
+        const container =
+            document.createElement("div");
+
+        container.className =
+            "study-bar-container";
+
+        const bar =
+            document.createElement("div");
+
+        bar.className = "study-bar";
+
+        const percentage =
+            Math.min(
+                (day.minutes / DAILY_STUDY_GOAL) * 100,
+                100
+            );
+
+        bar.style.height =
+            `${percentage}%`;
+
+        const hours =
+            document.createElement("div");
+
+        hours.className = "study-hours";
+
+        hours.textContent =
+            formatStudyTime(day.minutes);
+
+        container.appendChild(hours);
+        container.appendChild(bar);
+
+        studyBars.appendChild(container);
+    });
+}
+
+function addStudyTime(minutes) {
+    const today = new Date().getDay();
+
+    studyData[today] =
+        (studyData[today] || 0) + minutes;
+
+    saveStudyData();
+
+    updateStudyStatistic();
+    renderStudyChart();
+}
+updateStudyStatistic();
+renderStudyChart();

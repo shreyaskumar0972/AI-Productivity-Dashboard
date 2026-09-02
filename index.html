@@ -33,7 +33,10 @@
 <section class="cards">
 <div class="stat purple"><h3>Attendance</h3><h2>92%</h2></div>
 <div class="stat blue"><h3>Assignments</h3><h2>6</h2></div>
-<div class="stat green"><h3>Study</h3><h2>3.5h</h2></div>
+<div class="stat green">
+    <h3>Study</h3>
+    <h2 id="studyTime">0m</h2>
+</div>
 <div class="stat orange">
     <h3>Tasks</h3>
     <h2 id="taskCount">0</h2>
@@ -53,17 +56,19 @@
 </div>
 
 <div class="panel">
-<h2>Weekly Study Progress</h2>
-<div class="bars">
-<div style="height:65%"></div>
-<div style="height:85%"></div>
-<div style="height:40%"></div>
-<div style="height:95%"></div>
-<div style="height:75%"></div>
-<div style="height:55%"></div>
-<div style="height:80%"></div>
-</div>
-<div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+    <h2>Weekly Study Progress</h2>
+
+    <div class="bars" id="studyBars"></div>
+
+    <div class="days">
+        <span>M</span>
+        <span>T</span>
+        <span>W</span>
+        <span>T</span>
+        <span>F</span>
+        <span>S</span>
+        <span>S</span>
+    </div>
 </div>
 
 </div>

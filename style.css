@@ -90,3 +90,25 @@ blockquote{color:#cbd5e1;font-style:italic;line-height:1.6}
 .session-count strong {
     color: #ffffff;
 }
+/* STUDY PROGRESS */
+.study-bar {
+    flex: 1;
+    background: linear-gradient(#8b5cf6, #4f46e5);
+    border-radius: 8px 8px 0 0;
+    min-height: 4px;
+    transition: height 0.3s ease;
+}
+
+.study-bar-container {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.study-hours {
+    text-align: center;
+    font-size: 11px;
+    color: #94a3b8;
+    margin-bottom: 5px;
+}
