@@ -451,3 +451,191 @@ function addStudyTime(minutes) {
 }
 updateStudyStatistic();
 renderStudyChart();
+
+// Schedule Part
+const defaultSchedule = [
+    {
+        id: 1,
+        time: "09:00",
+        title: "DBMS Lecture"
+    },
+    {
+        id: 2,
+        time: "11:00",
+        title: "AI Lab"
+    },
+    {
+        id: 3,
+        time: "14:00",
+        title: "Web Development"
+    },
+    {
+        id: 4,
+        time: "18:00",
+        title: "Gym"
+    }
+];
+
+
+function loadSchedule() {
+    const savedSchedule =
+        localStorage.getItem("productivitySchedule");
+
+    if (savedSchedule) {
+        return JSON.parse(savedSchedule);
+    }
+
+    return defaultSchedule;
+}
+
+
+let schedule = loadSchedule();
+
+
+function saveSchedule() {
+    localStorage.setItem(
+        "productivitySchedule",
+        JSON.stringify(schedule)
+    );
+}
+
+
+function renderSchedule() {
+    const scheduleList =
+        document.getElementById("scheduleList");
+
+    scheduleList.innerHTML = "";
+
+    if (schedule.length === 0) {
+        const emptyMessage =
+            document.createElement("p");
+
+        emptyMessage.className =
+            "empty-schedule";
+
+        emptyMessage.textContent =
+            "No events scheduled for today.";
+
+        scheduleList.appendChild(emptyMessage);
+
+        return;
+    }
+
+    schedule
+        .sort((a, b) => a.time.localeCompare(b.time))
+        .forEach(event => {
+
+            const row =
+                document.createElement("div");
+
+            row.className = "schedule-row";
+
+            const time =
+                document.createElement("span");
+
+            time.className = "schedule-time";
+            time.textContent = event.time;
+
+            const title =
+                document.createElement("span");
+
+            title.className = "schedule-title";
+            title.textContent = event.title;
+
+            const deleteButton =
+                document.createElement("button");
+
+            deleteButton.className =
+                "delete-schedule";
+
+            deleteButton.textContent =
+                "Delete";
+
+            deleteButton.addEventListener(
+                "click",
+                () => deleteScheduleEvent(event.id)
+            );
+
+            row.appendChild(time);
+            row.appendChild(title);
+            row.appendChild(deleteButton);
+
+            scheduleList.appendChild(row);
+        });
+}
+
+
+function addScheduleEvent() {
+    const timeInput =
+        document.getElementById("scheduleTime");
+
+    const titleInput =
+        document.getElementById("scheduleTitle");
+
+    const time =
+        timeInput.value;
+
+    const title =
+        titleInput.value.trim();
+
+    if (time === "") {
+        alert("Please select a time.");
+        return;
+    }
+
+    if (title === "") {
+        alert("Please enter an event title.");
+        return;
+    }
+
+    const newEvent = {
+        id: Date.now(),
+        time: time,
+        title: title
+    };
+
+    schedule.push(newEvent);
+
+    saveSchedule();
+
+    timeInput.value = "";
+    titleInput.value = "";
+
+    renderSchedule();
+}
+
+
+function deleteScheduleEvent(eventId) {
+    schedule = schedule.filter(
+        event => event.id !== eventId
+    );
+
+    saveSchedule();
+
+    renderSchedule();
+}
+
+
+document
+    .getElementById("addScheduleButton")
+    .addEventListener(
+        "click",
+        addScheduleEvent
+    );
+
+
+document
+    .getElementById("scheduleTitle")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+                addScheduleEvent();
+            }
+
+        }
+    );
+
+
+renderSchedule();

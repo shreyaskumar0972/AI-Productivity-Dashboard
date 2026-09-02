@@ -112,3 +112,60 @@ blockquote{color:#cbd5e1;font-style:italic;line-height:1.6}
     color: #94a3b8;
     margin-bottom: 5px;
 }
+
+/* Schedule */
+.schedule-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.schedule-input input {
+    padding: 10px;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    background: #1e293b;
+    color: white;
+    outline: none;
+}
+
+.schedule-input input[type="text"] {
+    flex: 1;
+}
+
+.schedule-input button {
+    width: auto;
+    padding: 10px 18px;
+}
+
+.schedule-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #263246;
+}
+
+.schedule-time {
+    min-width: 55px;
+    color: #8b5cf6;
+    font-weight: 600;
+}
+
+.schedule-title {
+    flex: 1;
+    font-weight: 500;
+}
+
+.delete-schedule {
+    width: auto;
+    padding: 6px 10px;
+    background: #dc2626;
+    font-size: 12px;
+}
+
+.empty-schedule {
+    color: #64748b;
+    text-align: center;
+    padding: 15px 0;
+}
