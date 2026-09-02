@@ -25,7 +25,7 @@ updateGreeting();
 
 // TODO LIST
 
-let tasks = [
+const defaultTasks = [
     {
         id: 1,
         title: "Finish DBMS project",
@@ -48,6 +48,24 @@ let tasks = [
     }
 ];
 
+function loadTasks() {
+    const savedTasks = localStorage.getItem("productivityTasks");
+
+    if (savedTasks) {
+        return JSON.parse(savedTasks);
+    }
+
+    return defaultTasks;
+}
+
+let tasks = loadTasks();
+
+function saveTasks() {
+    localStorage.setItem(
+        "productivityTasks",
+        JSON.stringify(tasks)
+    );
+}
 
 function renderTasks() {
     const todoList = document.getElementById("todoList");
@@ -94,6 +112,8 @@ function toggleTask(taskId) {
 
     task.completed = !task.completed;
 
+    saveTasks();
+
     renderTasks();
     updateStatistics();
 }
@@ -101,6 +121,8 @@ function toggleTask(taskId) {
 
 function deleteTask(taskId) {
     tasks = tasks.filter(task => task.id !== taskId);
+
+    saveTasks();
 
     renderTasks();
     updateStatistics();
@@ -124,6 +146,8 @@ function addTask() {
     };
 
     tasks.push(newTask);
+
+    saveTasks();
 
     input.value = "";
 
