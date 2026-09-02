@@ -693,3 +693,74 @@ themeToggle.addEventListener(
 
 
 loadTheme();
+
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+
+function searchDashboard() {
+    const query = searchInput.value.trim().toLowerCase();
+
+    searchResults.innerHTML = "";
+
+    if (query === "") {
+        searchResults.style.display = "none";
+        return;
+    }
+
+    const results = [];
+
+    // Search tasks
+    tasks.forEach(task => {
+    const taskText = task.text || task.title || task.name || "";
+
+        if (taskText.toLowerCase().includes(query)) {
+            results.push({
+                type: "Task",
+                title: taskText
+            });
+        }
+    });
+
+    // Search schedule
+    schedule.forEach(event => {
+        const eventTitle = event.title || event.name || "";
+        const eventTime = event.time || "";
+
+        if (
+            eventTitle.toLowerCase().includes(query) ||
+            eventTime.includes(query)
+        ){
+            results.push({
+                type: "Schedule",
+                title: `${eventTime} — ${eventTitle}`
+            });
+        }
+    });
+
+    // Display results
+    if (results.length === 0) {
+        searchResults.innerHTML = `
+            <div class="no-results">
+                No results found
+            </div>
+        `;
+    } else {
+        results.forEach(result => {
+            searchResults.innerHTML += `
+                <div class="search-result">
+                    <div class="search-result-type">
+                        ${result.type}
+                    </div>
+
+                    <div class="search-result-title">
+                        ${result.title}
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    searchResults.style.display = "block";
+}
+
+searchInput.addEventListener("input", searchDashboard);
