@@ -57,3 +57,36 @@ blockquote{color:#cbd5e1;font-style:italic;line-height:1.6}
     padding: 6px 10px;
     font-size: 12px;
 }
+
+.timer-mode {
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 15px;
+}
+
+.timer-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.timer-controls button {
+    flex: 1;
+}
+
+.timer-controls button:nth-child(2) {
+    background: #475569;
+}
+
+.timer-controls button:nth-child(3) {
+    background: #334155;
+}
+
+.session-count {
+    text-align: center;
+    margin-top: 18px;
+    color: #94a3b8;
+}
+
+.session-count strong {
+    color: #ffffff;
+}

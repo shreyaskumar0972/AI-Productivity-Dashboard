@@ -87,9 +87,28 @@
 </div>
 
 <div class="panel timer">
-<h2>Pomodoro</h2>
-<div class="clock">25:00</div>
-<button>Start Session</button>
+    <h2>Pomodoro</h2>
+    <div class="clock" id="pomodoroClock">
+        25:00
+    </div>
+    <p class="timer-mode" id="timerMode">
+        Work Session
+    </p>
+    <div class="timer-controls">
+        <button id="startTimerButton">
+            Start
+        </button>
+        <button id="pauseTimerButton">
+            Pause
+        </button>
+        <button id="resetTimerButton">
+            Reset
+        </button>
+    </div>
+    <p class="session-count">
+        Completed Sessions:
+        <strong id="sessionCount">0</strong>
+    </p>
 </div>
 
 <div class="panel">
