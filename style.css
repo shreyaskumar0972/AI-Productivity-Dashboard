@@ -534,3 +534,248 @@ body.light .empty-schedule {
 #assignmentStatusText {
     font-size: 13px;
 }
+
+/*Adjusment for different screens */
+/* Tablets */
+@media (max-width: 1000px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+     .search {
+        height: 50px;
+    }
+
+    .search input {
+        font-size: 14px;
+    }
+
+    .search i {
+        font-size: 18px;
+    }
+}
+/* Mobile */
+@media (max-width: 700px) {
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    #greeting {
+        font-size: 34px;
+        line-height: 1.1;
+        white-space: nowrap;
+    }
+
+
+    .welcome h1 {
+        font-size: 36px;
+        line-height: 1.1;
+        white-space: normal;
+    }
+
+    .welcome p {
+        font-size: 16px;
+    }
+
+    /*SIDEBAR*/
+
+    .sidebar {
+        width: 60px;
+        padding: 20px 8px;
+    }
+
+    .sidebar h1 {
+        font-size: 0;
+        text-align: center;
+    }
+
+    .sidebar h1 i {
+        font-size: 24px;
+    }
+
+    .sidebar span {
+        display: none;
+    }
+
+    .sidebar a {
+        justify-content: center;
+        padding: 12px 5px;
+    }
+
+    /*MAIN CONTENT*/
+
+    .main {
+        margin-left: 60px;
+        width: calc(100% - 60px);
+        max-width: calc(100% - 60px);
+        padding: 15px;
+    }
+
+    /*TOPBAR*/
+
+    .topbar {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .search {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .search input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .icons {
+        margin-left: auto;
+        display: flex;
+        gap: 10px;
+    }
+
+    /*GREETING*/
+
+    .hero h1,
+    .greeting h1 {
+        font-size: 36px;
+        line-height: 1.1;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .hero p,
+    .greeting p {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    /*STAT CARDS*/
+
+    .stats {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /*PANELS*/
+
+    .content-grid {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /*ASSIGNMENTS*/
+
+    .assignment-input {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .assignment-input input,
+    .assignment-input button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .assignment-item {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .assignment-actions {
+        width: 100%;
+    }
+
+    .assignment-actions button {
+        flex: 1;
+    }
+
+    /*ATTENDANCE*/
+
+     .attendance-controls {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        width: 100%;
+    }
+
+    .attendance-controls button {
+        width: 100%;
+        min-width: 0;
+        padding: 8px 4px;
+        font-size: 13px;
+    }
+
+    /*SCHEDULE*/
+
+    .schedule-input {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .schedule-input input,
+    .schedule-input button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .schedule-row {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    /*WEATHER*/
+
+    .weather-details {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    /*SEARCH RESULTS */
+
+    .search-results {
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+}
