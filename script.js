@@ -174,14 +174,28 @@ renderTasks();
 
 //Dashboard Statistics
 function updateStatistics() {
-    const taskCountElement =
-        document.getElementById("taskCount");
+    const pendingTasks =
+        tasks.filter(task => !task.completed).length;
 
-    const pendingTasks = tasks.filter(
-        task => !task.completed
-    ).length;
+    const completedTasks =
+        tasks.filter(task => task.completed).length;
 
-    taskCountElement.textContent = pendingTasks;
+    taskCount.textContent =
+        pendingTasks;
+
+    const taskStatusText =
+        document.getElementById("taskStatusText");
+
+    if (pendingTasks === 0 && completedTasks > 0) {
+        taskStatusText.textContent =
+            "All tasks completed!";
+    } else if (pendingTasks === 1) {
+        taskStatusText.textContent =
+            "1 task remaining";
+    } else {
+        taskStatusText.textContent =
+            `${pendingTasks} tasks remaining`;
+    }
 }
 
 updateStatistics();
@@ -373,15 +387,27 @@ function formatStudyTime(minutes) {
     return `${hours}h ${remainingMinutes}m`;
 }
 function updateStudyStatistic() {
-    const studyTimeElement =
-        document.getElementById("studyTime");
+    const todayMinutes =
+        studyData[new Date().getDay()] || 0;
 
-    const today = new Date().getDay();
-
-    const todayMinutes = studyData[today] || 0;
-
-    studyTimeElement.textContent =
+    studyTime.textContent =
         formatStudyTime(todayMinutes);
+
+    const studyGoalText =
+        document.getElementById("studyGoalText");
+
+    const goalMinutes = DAILY_STUDY_GOAL;
+
+    const remainingMinutes =
+        Math.max(goalMinutes - todayMinutes, 0);
+
+    if (todayMinutes >= goalMinutes) {
+        studyGoalText.textContent =
+            "Daily goal completed!";
+    } else {
+        studyGoalText.textContent =
+            `${formatStudyTime(remainingMinutes)} left today`;
+    }
 }
 function renderStudyChart() {
     const studyBars =
@@ -1158,8 +1184,32 @@ function updateAssignmentCount() {
             assignment => !assignment.completed
         ).length;
 
+    const completedAssignments =
+        assignments.filter(
+            assignment => assignment.completed
+        ).length;
+
     assignmentCount.textContent =
         pendingAssignments;
+
+    const assignmentStatusText =
+        document.getElementById(
+            "assignmentStatusText"
+        );
+
+    if (
+        pendingAssignments === 0 &&
+        completedAssignments > 0
+    ) {
+        assignmentStatusText.textContent =
+            "All assignments completed!";
+    } else if (pendingAssignments === 1) {
+        assignmentStatusText.textContent =
+            "1 assignment remaining";
+    } else {
+        assignmentStatusText.textContent =
+            `${pendingAssignments} assignments remaining`;
+    }
 }
 
 function toggleAssignment(id) {

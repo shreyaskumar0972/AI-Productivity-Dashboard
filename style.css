@@ -521,3 +521,16 @@ body.light .empty-schedule {
 #newMotivationButton:hover {
     background: rgba(255, 255, 255, 0.25);
 }
+
+/*Productivity insights*/
+.stat-card p {
+    margin-top: 5px;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+#studyGoalText,
+#taskStatusText,
+#assignmentStatusText {
+    font-size: 13px;
+}
