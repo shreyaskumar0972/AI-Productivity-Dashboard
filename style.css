@@ -394,3 +394,108 @@ body.light .empty-schedule {
 #resetAttendanceButton:hover {
     opacity: 1;
 }
+
+/*ASSIGNMENTS*/
+
+.assignment-input {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.assignment-input input {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #252d40;
+    color: white;
+}
+
+#assignmentTitle {
+    flex: 1;
+}
+
+.assignment-input button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    background: #6c2bd9;
+    color: white;
+}
+
+.assignment-input button:hover {
+    opacity: 0.9;
+}
+
+.assignment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.assignment-info {
+    flex: 1;
+}
+
+.assignment-title {
+    font-weight: 600;
+}
+
+.assignment-date {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+.assignment-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.assignment-actions button {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.complete-assignment {
+    background: #159570;
+}
+
+.delete-assignment {
+    background: #d94a4a;
+}
+
+.completed-assignment .assignment-title {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.completed-assignment .assignment-date {
+    opacity: 0.4;
+}
+
+.overdue-assignment {
+    border-left: 4px solid #e74c3c;
+}
+
+.overdue-label {
+    color: #e74c3c;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.empty-assignment {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.6;
+}

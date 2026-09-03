@@ -1017,3 +1017,223 @@ resetAttendanceButton.addEventListener(
 );
 
 updateAttendance();
+
+// ASSIGNMENTS
+
+const assignmentTitle =
+    document.getElementById("assignmentTitle");
+
+const assignmentDueDate =
+    document.getElementById("assignmentDueDate");
+
+const addAssignmentButton =
+    document.getElementById("addAssignmentButton");
+
+const assignmentList =
+    document.getElementById("assignmentList");
+
+const assignmentCount =
+    document.getElementById("assignmentCount");
+
+const defaultAssignments = [
+    {
+        id: 1,
+        title: "DBMS Project",
+        dueDate: "2026-09-05",
+        completed: false
+    },
+    {
+        id: 2,
+        title: "AI Research Paper",
+        dueDate: "2026-09-08",
+        completed: false
+    }
+];
+
+function loadAssignments() {
+    const savedAssignments =
+        localStorage.getItem("productivityAssignments");
+
+    if (savedAssignments) {
+        return JSON.parse(savedAssignments);
+    }
+
+    return defaultAssignments;
+}
+
+let assignments = loadAssignments();
+
+function saveAssignments() {
+    localStorage.setItem(
+        "productivityAssignments",
+        JSON.stringify(assignments)
+    );
+}
+
+function renderAssignments() {
+    assignmentList.innerHTML = "";
+
+    if (assignments.length === 0) {
+        assignmentList.innerHTML = `
+            <div class="empty-assignment">
+                No assignments yet.
+            </div>
+        `;
+
+        updateAssignmentCount();
+        return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    assignments.forEach(assignment => {
+        const dueDate = new Date(
+            assignment.dueDate + "T00:00:00"
+        );
+
+        const isOverdue =
+            !assignment.completed &&
+            dueDate < today;
+
+        const item = document.createElement("div");
+
+        item.className = "assignment-item";
+
+        if (assignment.completed) {
+            item.classList.add("completed-assignment");
+        }
+
+        if (isOverdue) {
+            item.classList.add("overdue-assignment");
+        }
+
+        item.innerHTML = `
+            <div class="assignment-info">
+
+                <div class="assignment-title">
+                    ${assignment.title}
+                </div>
+
+                <div class="assignment-date">
+                    Due: ${assignment.dueDate}
+                </div>
+
+                ${
+                    isOverdue
+                        ? `<div class="overdue-label">OVERDUE</div>`
+                        : ""
+                }
+
+            </div>
+
+            <div class="assignment-actions">
+
+                <button
+                    class="complete-assignment"
+                    onclick="toggleAssignment(${assignment.id})"
+                >
+                    ${assignment.completed ? "Undo" : "Complete"}
+                </button>
+
+                <button
+                    class="delete-assignment"
+                    onclick="deleteAssignment(${assignment.id})"
+                >
+                    Delete
+                </button>
+
+            </div>
+        `;
+
+        assignmentList.appendChild(item);
+    });
+
+    updateAssignmentCount();
+}
+
+function updateAssignmentCount() {
+    const pendingAssignments =
+        assignments.filter(
+            assignment => !assignment.completed
+        ).length;
+
+    assignmentCount.textContent =
+        pendingAssignments;
+}
+
+function toggleAssignment(id) {
+    const assignment =
+        assignments.find(
+            assignment => assignment.id === id
+        );
+
+    if (!assignment) {
+        return;
+    }
+
+    assignment.completed =
+        !assignment.completed;
+
+    saveAssignments();
+    renderAssignments();
+}
+
+function deleteAssignment(id) {
+    assignments =
+        assignments.filter(
+            assignment => assignment.id !== id
+        );
+
+    saveAssignments();
+    renderAssignments();
+}
+
+function addAssignment() {
+    const title =
+        assignmentTitle.value.trim();
+
+    const dueDate =
+        assignmentDueDate.value;
+
+    if (title === "") {
+        alert("Please enter an assignment title.");
+        return;
+    }
+
+    if (dueDate === "") {
+        alert("Please select a due date.");
+        return;
+    }
+
+    const newAssignment = {
+        id: Date.now(),
+        title: title,
+        dueDate: dueDate,
+        completed: false
+    };
+
+    assignments.push(newAssignment);
+
+    saveAssignments();
+    renderAssignments();
+
+    assignmentTitle.value = "";
+    assignmentDueDate.value = "";
+}
+
+addAssignmentButton.addEventListener(
+    "click",
+    addAssignment
+);
+
+assignmentTitle.addEventListener(
+    "keydown",
+    event => {
+        if (event.key === "Enter") {
+            addAssignment();
+        }
+    }
+);
+
+renderAssignments();

@@ -63,7 +63,11 @@
     <button id="resetAttendanceButton">Reset</button>
 </div>
 </div>
-<div class="stat blue"><h3>Assignments</h3><h2>6</h2></div>
+<div class="stat-card assignments">
+    <h3>Assignments</h3>
+    <h2 id="assignmentCount">0</h2>
+    <p>Pending assignments</p>
+</div>
 <div class="stat green">
     <h3>Study</h3>
     <h2 id="studyTime">0m</h2>
@@ -135,6 +139,29 @@
     </div>
 
     <div id="todoList"></div>
+</div>
+
+<div class="panel assignments-panel">
+    <h2>Assignments</h2>
+
+    <div class="assignment-input">
+        <input
+            type="text"
+            id="assignmentTitle"
+            placeholder="Assignment title..."
+        >
+
+        <input
+            type="date"
+            id="assignmentDueDate"
+        >
+
+        <button id="addAssignmentButton">
+            Add
+        </button>
+    </div>
+
+    <div id="assignmentList"></div>
 </div>
 
 <div class="panel timer">
