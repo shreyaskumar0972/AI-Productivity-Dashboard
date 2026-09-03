@@ -1237,3 +1237,93 @@ assignmentTitle.addEventListener(
 );
 
 renderAssignments();
+
+// SMART MOTIVATION
+
+const motivationMessage =
+    document.getElementById("motivationMessage");
+
+const newMotivationButton =
+    document.getElementById("newMotivationButton");
+
+const motivationMessages = [
+    "Small progress is still progress. Keep moving forward.",
+    "Focus on one important task at a time.",
+    "You don't need to finish everything today. Just make meaningful progress.",
+    "A focused 25 minutes can make a bigger difference than you think.",
+    "Consistency beats motivation. Keep showing up.",
+    "Your future self will thank you for the work you do today.",
+    "Start with the easiest task and build momentum.",
+    "Don't wait for the perfect time. Start now."
+];
+function getSmartMotivation() {
+    const pendingTasks =
+        tasks.filter(task => !task.completed).length;
+
+    const pendingAssignments =
+        assignments.filter(
+            assignment => !assignment.completed
+        ).length;
+
+    const overdueAssignments =
+        assignments.filter(assignment => {
+            if (assignment.completed) {
+                return false;
+            }
+
+            const dueDate =
+                new Date(assignment.dueDate + "T00:00:00");
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            return dueDate < today;
+        }).length;
+
+    const todayStudyMinutes =
+        studyData[new Date().getDay()] || 0;
+
+
+    // Priority 1: overdue assignments
+    if (overdueAssignments > 0) {
+        return `You have ${overdueAssignments} overdue assignment${overdueAssignments > 1 ? "s" : ""}. Let's clear the most urgent one first.`;
+    }
+
+
+    // Priority 2: tasks
+    if (pendingTasks >= 5) {
+        return `You have ${pendingTasks} pending tasks. Don't tackle everything at once — pick one and get started.`;
+    }
+
+
+    // Priority 3: study
+    if (todayStudyMinutes === 0) {
+        return "You haven't studied yet today. Start with one 25-minute focused session.";
+    }
+
+
+    // Priority 4: assignments
+    if (pendingAssignments > 0) {
+        return `You have ${pendingAssignments} assignment${pendingAssignments > 1 ? "s" : ""} waiting for you. Keep making progress.`;
+    }
+
+
+    // Otherwise use a random motivation
+    const randomIndex =
+        Math.floor(
+            Math.random() * motivationMessages.length
+        );
+
+    return motivationMessages[randomIndex];
+}
+
+function updateMotivation() {
+    motivationMessage.textContent =
+        getSmartMotivation();
+}
+updateMotivation();
+
+newMotivationButton.addEventListener(
+    "click",
+    updateMotivation
+);

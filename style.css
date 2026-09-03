@@ -499,3 +499,25 @@ body.light .empty-schedule {
     padding: 20px;
     opacity: 0.6;
 }
+
+/*MOTIVATION*/
+
+.motivation blockquote {
+    margin: 15px 0;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+#newMotivationButton {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+    color: inherit;
+}
+
+#newMotivationButton:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
