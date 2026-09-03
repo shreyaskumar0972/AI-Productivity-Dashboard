@@ -146,10 +146,24 @@
     </p>
 </div>
 
-<div class="panel">
-<h2>Weather</h2>
-<h1>28°C ☀️</h1>
-<p>Phagwara, Punjab</p>
+<div class="panel weather">
+    <h2>Weather</h2>
+
+    <div class="weather-info">
+        <div class="weather-main">
+            <span id="weatherTemperature">--°C</span>
+            <span id="weatherIcon">🌤️</span>
+        </div>
+
+        <p id="weatherLocation">Loading location...</p>
+
+        <div class="weather-details">
+            <span id="weatherFeelsLike">Feels like --°C</span>
+            <span id="weatherHumidity">Humidity --%</span>
+        </div>
+
+        <p id="weatherStatus">Loading weather...</p>
+    </div>
 </div>
 
 <div class="panel">

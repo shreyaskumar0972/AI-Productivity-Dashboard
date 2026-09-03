@@ -764,3 +764,141 @@ function searchDashboard() {
 }
 
 searchInput.addEventListener("input", searchDashboard);
+
+// WEATHER
+
+const weatherTemperature = document.getElementById("weatherTemperature");
+const weatherIcon = document.getElementById("weatherIcon");
+const weatherLocation = document.getElementById("weatherLocation");
+const weatherFeelsLike = document.getElementById("weatherFeelsLike");
+const weatherHumidity = document.getElementById("weatherHumidity");
+const weatherStatus = document.getElementById("weatherStatus");
+
+async function loadWeather() {
+    try {
+        // Phagwara, Punjab coordinates
+        const latitude = 31.224;
+        const longitude = 75.770;
+
+        const url =
+            `https://api.open-meteo.com/v1/forecast` +
+            `?latitude=${latitude}` +
+            `&longitude=${longitude}` +
+            `&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code` +
+            `&timezone=Asia%2FKolkata`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Weather API request failed");
+        }
+
+        const data = await response.json();
+
+        const currentWeather = data.current;
+
+        const temperature = Math.round(currentWeather.temperature_2m);
+        const feelsLike = Math.round(currentWeather.apparent_temperature);
+        const humidity = currentWeather.relative_humidity_2m;
+        const weatherCode = currentWeather.weather_code;
+
+        weatherTemperature.textContent = `${temperature}°C`;
+        weatherFeelsLike.textContent = `Feels like ${feelsLike}°C`;
+        weatherHumidity.textContent = `Humidity ${humidity}%`;
+        weatherLocation.textContent = "Phagwara, Punjab";
+
+        weatherStatus.textContent = getWeatherDescription(weatherCode);
+        weatherIcon.textContent = getWeatherIcon(weatherCode);
+
+    } catch (error) {
+        console.error("Weather error:", error);
+
+        weatherTemperature.textContent = "--°C";
+        weatherFeelsLike.textContent = "Feels like --°C";
+        weatherHumidity.textContent = "Humidity --%";
+        weatherLocation.textContent = "Phagwara, Punjab";
+        weatherStatus.textContent = "Unable to load weather";
+        weatherIcon.textContent = "⚠️";
+    }
+}
+
+function getWeatherDescription(code) {
+    if (code === 0) {
+        return "Clear sky";
+    }
+
+    if (code === 1 || code === 2) {
+        return "Partly cloudy";
+    }
+
+    if (code === 3) {
+        return "Overcast";
+    }
+
+    if ([45, 48].includes(code)) {
+        return "Foggy";
+    }
+
+    if ([51, 53, 55, 56, 57].includes(code)) {
+        return "Drizzle";
+    }
+
+    if ([61, 63, 65, 66, 67].includes(code)) {
+        return "Rain";
+    }
+
+    if ([71, 73, 75, 77].includes(code)) {
+        return "Snow";
+    }
+
+    if ([80, 81, 82].includes(code)) {
+        return "Rain showers";
+    }
+
+    if ([95, 96, 99].includes(code)) {
+        return "Thunderstorm";
+    }
+
+    return "Unknown weather";
+}
+
+function getWeatherIcon(code) {
+    if (code === 0) {
+        return "☀️";
+    }
+
+    if (code === 1 || code === 2) {
+        return "🌤️";
+    }
+
+    if (code === 3) {
+        return "☁️";
+    }
+
+    if ([45, 48].includes(code)) {
+        return "🌫️";
+    }
+
+    if ([51, 53, 55, 56, 57].includes(code)) {
+        return "🌦️";
+    }
+
+    if ([61, 63, 65, 66, 67].includes(code)) {
+        return "🌧️";
+    }
+
+    if ([71, 73, 75, 77].includes(code)) {
+        return "❄️";
+    }
+
+    if ([80, 81, 82].includes(code)) {
+        return "🌦️";
+    }
+
+    if ([95, 96, 99].includes(code)) {
+        return "⛈️";
+    }
+
+    return "🌡️";
+}
+loadWeather();

@@ -319,3 +319,42 @@ body.light .empty-schedule {
     text-align: center;
     opacity: 0.6;
 }
+
+/*WEATHER */
+
+.weather-info {
+    margin-top: 15px;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.weather-main span:first-child {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#weatherIcon {
+    font-size: 32px;
+}
+
+.weather-info > p {
+    margin: 8px 0;
+    opacity: 0.8;
+}
+
+.weather-details {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+#weatherStatus {
+    margin-top: 12px;
+    font-weight: 500;
+}
