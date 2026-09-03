@@ -778,4 +778,130 @@ body.light .empty-schedule {
         max-width: 100%;
         margin: 0;
     }
+
+    .notification-panel {
+        position: fixed;
+
+        top: 75px;
+        left: 15px;
+        right: 15px;
+
+        width: auto;
+        max-width: none;
+    }
+}
+
+/* Notifications */
+.notification-container {
+    position: relative;
+}
+
+.notification-button {
+    position: relative;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    min-width: 16px;
+    height: 16px;
+
+    padding: 2px 4px;
+
+    border-radius: 50%;
+
+    background: #e74c3c;
+    color: white;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-panel {
+    position: absolute;
+    top: 45px;
+    right: 0;
+
+    width: 340px;
+    max-height: 400px;
+
+    overflow-y: auto;
+
+    background: #1e2638;
+
+    border-radius: 10px;
+
+    padding: 15px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+    z-index: 2000;
+
+    display: none;
+}
+
+.notification-panel.show {
+    display: block;
+}
+
+.notification-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+.notification-header h3 {
+    margin: 0;
+}
+
+.clear-notifications {
+    border: none;
+    background: transparent;
+    color: inherit;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.clear-notifications:hover {
+    opacity: 1;
+}
+
+.notification-item {
+    padding: 12px 8px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.notification-message {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.empty-notifications {
+    text-align: center;
+    padding: 25px 10px;
+    opacity: 0.6;
 }

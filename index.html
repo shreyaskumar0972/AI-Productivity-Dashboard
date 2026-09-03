@@ -26,7 +26,42 @@
 <div class="search-results" id="searchResults"></div>
 
 <div class="icons">
-    <i class="fa-regular fa-bell"></i>
+    <div class="notification-container">
+
+    <button
+        class="notification-button"
+        id="notificationButton"
+        aria-label="Notifications"
+    >
+        <i class="fa-solid fa-bell"></i>
+
+        <span
+            class="notification-badge"
+            id="notificationBadge"
+        >
+        
+        </span>
+    </button>
+
+    <div
+        class="notification-panel"
+        id="notificationPanel"
+    >
+        <div class="notification-header">
+            <h3>Notifications</h3>
+
+            <button
+                id="clearNotificationsButton"
+                class="clear-notifications"
+            >
+                Clear
+            </button>
+        </div>
+
+        <div id="notificationList"></div>
+    </div>
+
+</div>
 
     <button
         class="theme-toggle"

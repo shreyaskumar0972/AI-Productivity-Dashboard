@@ -1377,3 +1377,198 @@ newMotivationButton.addEventListener(
     "click",
     updateMotivation
 );
+
+// Notifications
+const notificationButton =
+    document.getElementById("notificationButton");
+
+const notificationPanel =
+    document.getElementById("notificationPanel");
+
+const notificationList =
+    document.getElementById("notificationList");
+
+const notificationBadge =
+    document.getElementById("notificationBadge");
+
+const clearNotificationsButton =
+    document.getElementById(
+        "clearNotificationsButton"
+    );
+function generateNotifications() {
+
+    const notifications = [];
+
+    // OVERDUE ASSIGNMENTS
+
+    assignments.forEach(assignment => {
+
+        if (assignment.completed) {
+            return;
+        }
+
+        const dueDate =
+            new Date(
+                assignment.dueDate + "T00:00:00"
+            );
+
+        const today = new Date();
+
+        today.setHours(0, 0, 0, 0);
+
+        if (dueDate < today) {
+
+            notifications.push({
+                title: "🔴 Assignment overdue",
+                message:
+                    `${assignment.title} was due on ${assignment.dueDate}.`
+            });
+
+        }
+
+    });
+
+    // STUDY REMINDER
+
+    const todayStudyMinutes =
+        studyData[new Date().getDay()] || 0;
+
+    if (todayStudyMinutes === 0) {
+
+        notifications.push({
+            title: "📚 Study reminder",
+            message:
+                "You haven't studied today yet."
+        });
+
+    }
+
+    // UPCOMING SCHEDULE
+
+    const now = new Date();
+
+    const currentMinutes =
+        now.getHours() * 60 +
+        now.getMinutes();
+
+    schedule.forEach(event => {
+
+        const [hours, minutes] =
+            event.time.split(":").map(Number);
+
+        const eventMinutes =
+            hours * 60 + minutes;
+
+        const difference =
+            eventMinutes - currentMinutes;
+
+        if (
+            difference >= 0 &&
+            difference <= 60
+        ) {
+
+            notifications.push({
+                title: "📅 Upcoming event",
+                message:
+                    `${event.title} starts at ${event.time}.`
+            });
+
+        }
+
+    });
+
+
+    return notifications;
+}
+
+function renderNotifications() {
+
+    const notifications =
+        generateNotifications();
+
+    notificationList.innerHTML = "";
+
+    notificationBadge.textContent =
+        notifications.length;
+
+    if (notifications.length === 0) {
+
+        notificationList.innerHTML = `
+            <div class="empty-notifications">
+                🎉 You're all caught up!
+            </div>
+        `;
+
+        return;
+    }
+
+    notifications.forEach(notification => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "notification-item";
+
+        item.innerHTML = `
+            <div class="notification-title">
+                ${notification.title}
+            </div>
+
+            <div class="notification-message">
+                ${notification.message}
+            </div>
+        `;
+
+        notificationList.appendChild(item);
+
+    });
+}
+
+notificationButton.addEventListener(
+    "click",
+    () => {
+
+        notificationPanel.classList.toggle(
+            "show"
+        );
+
+        renderNotifications();
+
+    }
+);
+
+document.addEventListener(
+    "click",
+    event => {
+
+        if (
+            !event.target.closest(
+                ".notification-container"
+            )
+        ) {
+
+            notificationPanel.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+clearNotificationsButton.addEventListener(
+    "click",
+    () => {
+
+        notificationList.innerHTML = `
+            <div class="empty-notifications">
+                No notifications
+            </div>
+        `;
+
+        notificationBadge.textContent = "0";
+
+    }
+);
+renderNotifications();
