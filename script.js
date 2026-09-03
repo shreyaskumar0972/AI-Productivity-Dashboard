@@ -1,3 +1,5 @@
+//PRODUCTIVITY DASHBOARD SCRIPT//
+
 // DYNAMIC GREETING
 
 function updateGreeting() {
@@ -478,7 +480,7 @@ function addStudyTime(minutes) {
 updateStudyStatistic();
 renderStudyChart();
 
-// Schedule Part
+// SCHEDULE
 const defaultSchedule = [
     {
         id: 1,
@@ -802,7 +804,7 @@ const weatherStatus = document.getElementById("weatherStatus");
 
 async function loadWeather() {
     try {
-        // Phagwara, Punjab coordinates
+        
         const latitude = 31.224;
         const longitude = 75.770;
 
@@ -1334,31 +1336,31 @@ function getSmartMotivation() {
         studyData[new Date().getDay()] || 0;
 
 
-    // Priority 1: overdue assignments
+    // overdue assignments
     if (overdueAssignments > 0) {
         return `You have ${overdueAssignments} overdue assignment${overdueAssignments > 1 ? "s" : ""}. Let's clear the most urgent one first.`;
     }
 
 
-    // Priority 2: tasks
+    // tasks
     if (pendingTasks >= 5) {
         return `You have ${pendingTasks} pending tasks. Don't tackle everything at once — pick one and get started.`;
     }
 
 
-    // Priority 3: study
+    // study
     if (todayStudyMinutes === 0) {
         return "You haven't studied yet today. Start with one 25-minute focused session.";
     }
 
 
-    // Priority 4: assignments
+    // assignments
     if (pendingAssignments > 0) {
         return `You have ${pendingAssignments} assignment${pendingAssignments > 1 ? "s" : ""} waiting for you. Keep making progress.`;
     }
 
 
-    // Otherwise use a random motivation
+    // random motivation
     const randomIndex =
         Math.floor(
             Math.random() * motivationMessages.length
