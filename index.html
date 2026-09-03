@@ -46,7 +46,23 @@
 </section>
 
 <section class="cards">
-<div class="stat purple"><h3>Attendance</h3><h2>92%</h2></div>
+<div class="stat-card attendance">
+    <h3>Attendance</h3>
+
+    <h2 id="attendancePercentage">0%</h2>
+
+    <p>
+        Present: <strong id="presentCount">0</strong>
+        |
+        Absent: <strong id="absentCount">0</strong>
+    </p>
+
+    <div class="attendance-controls">
+    <button id="presentButton">Present</button>
+    <button id="absentButton">Absent</button>
+    <button id="resetAttendanceButton">Reset</button>
+</div>
+</div>
 <div class="stat blue"><h3>Assignments</h3><h2>6</h2></div>
 <div class="stat green">
     <h3>Study</h3>

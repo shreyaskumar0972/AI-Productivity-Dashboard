@@ -902,3 +902,118 @@ function getWeatherIcon(code) {
     return "🌡️";
 }
 loadWeather();
+
+// ATTENDANCE
+
+const attendancePercentage =
+    document.getElementById("attendancePercentage");
+
+const presentCount =
+    document.getElementById("presentCount");
+
+const absentCount =
+    document.getElementById("absentCount");
+
+const presentButton =
+    document.getElementById("presentButton");
+
+const absentButton =
+    document.getElementById("absentButton");
+
+const resetAttendanceButton =
+    document.getElementById("resetAttendanceButton");
+
+const defaultAttendance = {
+    present: 23,
+    absent: 2
+};
+
+function loadAttendance() {
+    const savedAttendance =
+        localStorage.getItem("attendanceData");
+
+    if (savedAttendance) {
+        return JSON.parse(savedAttendance);
+    }
+
+    return defaultAttendance;
+}
+
+let attendance = loadAttendance();
+
+function saveAttendance() {
+    localStorage.setItem(
+        "attendanceData",
+        JSON.stringify(attendance)
+    );
+}
+
+function updateAttendance() {
+    const totalClasses =
+        attendance.present + attendance.absent;
+
+    let percentage = 0;
+
+    if (totalClasses > 0) {
+        percentage =
+            (attendance.present / totalClasses) * 100;
+    }
+
+    attendancePercentage.textContent =
+        `${percentage.toFixed(1)}%`;
+
+    presentCount.textContent =
+        attendance.present;
+
+    absentCount.textContent =
+        attendance.absent;
+}
+
+function markPresent() {
+    attendance.present++;
+
+    saveAttendance();
+    updateAttendance();
+}
+
+function markAbsent() {
+    attendance.absent++;
+
+    saveAttendance();
+    updateAttendance();
+}
+
+function resetAttendance() {
+    const confirmReset = confirm(
+        "Are you sure you want to reset attendance?"
+    );
+
+    if (!confirmReset) {
+        return;
+    }
+
+    attendance = {
+        present: 0,
+        absent: 0
+    };
+
+    saveAttendance();
+    updateAttendance();
+}
+
+presentButton.addEventListener(
+    "click",
+    markPresent
+);
+
+absentButton.addEventListener(
+    "click",
+    markAbsent
+);
+
+resetAttendanceButton.addEventListener(
+    "click",
+    resetAttendance
+);
+
+updateAttendance();

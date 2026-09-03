@@ -358,3 +358,39 @@ body.light .empty-schedule {
     margin-top: 12px;
     font-weight: 500;
 }
+
+/*ATTENDANCE */
+
+.attendance p {
+    margin: 8px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.attendance-controls {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.attendance-controls button {
+    border: none;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+    color: inherit;
+}
+
+.attendance-controls button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+#resetAttendanceButton {
+    opacity: 0.7;
+}
+
+#resetAttendanceButton:hover {
+    opacity: 1;
+}
